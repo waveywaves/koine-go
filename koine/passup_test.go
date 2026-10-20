@@ -16,6 +16,9 @@ func TestPassUp_NilLineageAnswersUnfilled(t *testing.T) {
 	offered := deployRecorded{Artifact: "payments-api"}
 
 	passage := station.PassUp(offered)
+	if passage != 0 {
+		t.Fatalf("PassUp returned passage %d, want the empty passage 0", passage)
+	}
 	station.Withhold(offered)
 	got := station.Await(passage)
 
